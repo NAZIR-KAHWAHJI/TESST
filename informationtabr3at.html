@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Details</title>
+        <!-- ======= Styles ====== -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+          #imgco{
+            border-radius: 50px;
+            margin: 55px 15px;
+            width: 350px;
+            height: 350px;
+            float: right;
+          }
+          #name{
+            position: absolute;
+            right: 370px;
+            direction: ltr;
+            margin: 69px 5px;
+          }
+
+          #title{
+          margin: 124px 43px;
+          font-size: large;
+          }
+          #info0{
+            position: absolute;
+            top: 35%;
+            margin: 0px 292px;
+          }
+          #info{
+            position: absolute;
+            top: 37%;
+            margin: 0px 292px;
+          }
+          #info2{
+            position: absolute;
+            top: 37%;
+            margin: 0px 540px;
+          }
+          #info3{
+            position: absolute;
+            top: 37%;
+            margin: 0px 788px;
+          }
+          #info4{
+            position: absolute;
+            top: 60%;
+            margin: 0px 280px;
+          }
+          #info5{
+            position: absolute;
+            top: 65%;
+            margin: 0px 280px;
+          }
+          .key{
+            font-weight: bold;
+            font-size: 17px;
+          }
+          .val{
+            font-family: system-ui;
+            color: #6e6e6e;
+          }
+       
+      #b {
+        position: absolute;
+        top: 65px;
+        right: 20px;
+        width:40px;
+        height:40px;
+        border-Radius: 50%;
+        background-color:#2a2185;
+      }
+
+        </style>
+
+ 
+  
+</head>
+
+<body>
+    
+  
+    <div class="container_m" >
+
+          <!-- =============== Navigation ================ -->
+   
+        <div class="navigation1" >
+            <ul>
+                <li>
+                    <a href="home.html">
+                        <span class="icon">
+                            <ion-icon name="leaf"></ion-icon>
+                        </span>
+                        <span class="title" style="font-size:x-large;">Donate</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="home.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">الصفحة الرئيسية</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tabr3at.html">
+                        <span class="icon">
+                            <ion-icon name="stats-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">حملات التبرع</span>
+                    </a>
+                </li>
+
+
+                <li>
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="git-network-outline"></ion-icon>
+                    </span>
+                    <span class="title">حملات التطوع</span>
+                </a>
+            </li>
+
+            
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </span>
+                        <span class="title">المتبرعين</span>
+                    </a>
+                </li>
+
+                    <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">المتطوعين</span>
+                    </a>
+                </li>
+               
+
+            </ul>
+        </div>
+  
+          <!-- =============== /Navigation ================ -->
+
+
+        <!-- ========================= Main ==================== -->
+        <div class="main1">
+            <div class="topbar" style="background: #2a2185;">
+                
+                <div class="toggle1" style="color: white;">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="dropdown">
+                        <div class="user">
+                            <img src="assets/imgs/customer01.jpg" alt="">
+                        </div>
+                        
+                        <div class="dropdown-content" style="left: 30px;">
+                            <a class="dropdown-item" href="#"> <ion-icon name="cog-outline"></ion-icon>  إعدادات 
+
+                            </a>
+
+                            <a class="dropdown-item" href="#"  onclick="logout()">
+                                <ion-icon name="log-out-outline"></ion-icon>  تسجيل خروج
+                            </a>
+                        </div>
+                        
+                </div>
+           
+               
+
+            </div>
+            
+
+            <button id="b"  onclick="del()">
+              <ion-icon name="trash-outline" style="height: 30px; width: 30px; color: rgb(255, 255, 255)"></ion-icon>
+            </button>
+
+            <a id="b" style="margin: 0px 70px;" onclick="update()">
+              <ion-icon name="pencil-outline" style="height: 30px; width: 40px; margin: 4px 0px; color: rgb(255, 255, 255)"></ion-icon>
+            </a>
+
+            <img id="imgco">   
+            <h1 id="name"></h1>
+            <p id="title"></p>
+
+            <pre id="info">
+              
+           <span class="key">المبلغ الاجمالي:</span>  <span class="val" id="target"></span>  
+           
+           <span class="key">المبلغ المحصل:</span>  <span class="val"  id="amount"></span>  
+
+           <span class="key">المبلغ المتبقي:</span>  <span class="val"  id="sub"></span>  
+
+          </pre>
+
+
+          <pre id="info2">
+              
+            <span class="key">البلد:</span>  <span class="val" id="country"></span>  
+            
+            <span class="key">العنوان:</span>  <span class="val"  id="address"></span>  
+ 
+            <span class="key">حالة الحملة:</span>  <span class="val"  id="status"></span>  
+ 
+           </pre>
+
+
+           <pre id="info3">
+              
+            <span class="key">اهمية الحملة:</span>  <span class="val" id="preority"></span>  
+            
+            <span class="key">تاريخ البداية:</span>  <span class="val"  id="startTime"></span>  
+ 
+            <span class="key">تاريخ النهاية:</span>  <span class="val"  id="endTime"></span>  
+ 
+           </pre>
+
+          <pre id="info0">
+           <samp> فئات: </samp> <samp id="category"></samp>
+          </pre>
+
+          <pre id="info4">
+            <samp> ملاحظات: </samp> <samp id="note"></samp>
+           </pre>
+
+           
+           
+           <table id="data-table">
+            
+            <thead>
+                <tr>
+                    
+                    <th>اسم المستخدم</th>
+                    <th>جنس المتبرع</th>
+                    <th>عمر المتبرع</th>
+                    <th>الوظيفة</th>
+                    <th>العنوان</th>
+                    <th>البريد الالكتروني </th>
+                    <th>رقم الهاتف</th>
+                    <th>قيمة التبرع</th>
+                    
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+           
+
+
+          </div>
+                  
+    </div>
+    
+    
+    
+    
+    
+    
+        
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const cardId = urlParams.get('id');
+
+      axios.get('http://localhost:3000/campaign/'+cardId).then(function (response) {
+
+        var img = document.getElementById('imgco');
+        var name = document.querySelector('#name');
+        var title = document.querySelector('#title');
+        var target = document.querySelector('#target');
+        var amount = document.querySelector('#amount');
+        var sub = document.querySelector('#sub');
+        var country = document.querySelector('#country');
+        var address = document.querySelector('#address');
+        var status = document.querySelector('#status');
+        var preority = document.querySelector('#preority');
+        var startTime = document.querySelector('#startTime');
+        var endTime = document.querySelector('#endTime');
+        var category = document.querySelector('#category');
+        var note = document.querySelector('#note');
+
+
+
+
+        if (response.status === 200) {
+                  
+                img.src=response.data.image;
+                name.innerHTML=response.data.name;
+                title.innerHTML=response.data.title;
+                target.innerHTML=response.data.target.toLocaleString();
+                amount.innerHTML=response.data.amount.toLocaleString();
+                sub.innerHTML=(response.data.target-response.data.amount).toLocaleString();
+                country.innerHTML=response.data.country;
+                address.innerHTML=response.data.address;
+          
+                if(response.data.status=='Active'){
+                  status.innerHTML='مفعلة';
+                  }
+                else{
+                  status.innerHTML='غير مفعلة';
+                } 
+
+                if(response.data.preority=='Low'){
+                  preority.innerHTML='ضعيفة';
+                  }
+                else if(response.data.preority=='Medium'){
+                  preority.innerHTML='متوسطة';
+                } 
+                else{
+                  preority.innerHTML='عالية';
+                }
+                
+                startTime.innerHTML=response.data.startTime;
+                endTime.innerHTML=response.data.endTime;
+                category.innerHTML=response.data.category;
+                note.innerHTML=response.data.note;
+
+
+              }
+            });
+
+
+
+
+        function del(){
+          axios.delete('http://localhost:3000/campaign/'+cardId).then(function (response) {
+            alert("تم الحذف");
+            window.location='tabr3at.html';
+
+          });
+        }
+
+        function update(){
+          window.location.href ='updatecome.html?id=' + cardId;
+        }
+        
+
+     
+    </script>
+    
+    
+    <script src="assets/js/navbar.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+  
+  </html>
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+

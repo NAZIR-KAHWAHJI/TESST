@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>جدول مسنق</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .edit-btn, .delete-btn, .add-btn {
+            padding: 6px 12px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .add-btn {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        
+    /* ستايل للشاشة المنبثقة */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+      border-width: 6px;
+    }
+
+    /* ستايل للزر */
+    .open-popup-button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #334bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  
+    </style>
+</head>
+
+<body>
+
+    <table id="data-table">
+        <thead>
+            <tr>
+                
+                <th>الاسم</th>
+                <th>عنوان الحملة</th>
+                <th>الهدف</th>
+                <th>البلد</th>
+                <th>العنوان</th>
+                <th>النوع</th>
+                <th>مدة الحملة</th>
+                <th>اهمية الحملة</th>
+                <th>حالة الحملة</th>
+                <th>رقم الرخصة</th>
+                <th>الملاحظات</th>
+                <th>المدفوع</th>
+                <th>التقييم</th>
+                <th>الإجراءات</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+
+
+   
+    <button class="open-popup-button" onclick="openPopup()">اضافة حملة جديدة</button>
+    <div id="myPopup" class="popup" style="direction: rtl;">
+<table>
+    
+        <h2 style="text-align: center;">حملة جديدة</h2>
+    <tr>
+        <td><label for="newName">اسم الحملة:</label></td>       
+        <td><input type="text" id="newName" required></td>
+    
+       
+        <td><label for="target">المبلغ المطلوب:</label></td>
+        <td><input type="number" id="target"  required></td>
+        
+    </tr>
+    <tr>
+        <td><label for="avatar">Choose a profile picture:</label></td>
+
+        <td ><input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" /></td>
+
+        <td><label for="address">العنوان:</label></td>
+        <td><input type="text" id="address"   required></td>
+
+    </tr>
+    <tr>
+
+        <td><label for="title">عنوان الحملة:</label></td>
+        <td><input type="text" id="title"   required></td>
+        
+        <td><label for="country">البلد:</label></td>
+        <td><input type="text" id="country"   required></td>
+    </tr>
+    
+    <tr>
+        <td><label for="note">ملاحظات:</label></td>
+        <td><input type="text" id="note"   required></td>
+        
+        <td><label for="endTime">وقت انتهاء الحملة:</label></td>
+        <td><input type="datetime-local" id="endTime"   required></td>
+    </tr> 
+    
+    <tr>
+
+       <td> <label for="preority">اهمية الحملة:</label></td>
+        <td><select id="preority" style="width: 150px; text-align: center;">
+            <option value="">اختر قيمة</option>
+            <option value="Low">ضعيف</option>
+            <option value="Medium">متوسط</option>
+            <option value="High">عالي</option>
+        </select></td>
+            
+       <td><label for="status">حالة الحملة:</label></td> 
+       <td><select id="status" style="width: 150px; text-align: center;">
+            
+            <option value="">اختر قيمة</option>
+            <option value="Active">نشط</option>
+            <option value="Canceled">غير نشط</option>
+        </select></td>
+        
+    </tr>
+
+    <tr>
+
+        <td>
+            <label for="category">فئات الحملة:</label>
+        </td> 
+
+        <td>
+        <input type="checkbox" id="category1" name="c" value="رياضة">
+        <label for="category1">رياضة</label><br>
+        </td>
+
+        <td>
+        <input type="checkbox" id="category2" name="c" value="اجتماعي">
+        <label for="category2">اجتماعي</label><br>
+        </td>
+
+        <td>
+        <input type="checkbox" id="category3" name="c" value="ثقافي">
+        <label for="category3">ثقافي</label>
+        </td>
+    </tr>
+    
+<tr>
+    <td>
+        <button onclick="addRow()" style="text-align: center;">اضافة</button>
+        
+        
+            <button onclick="closePopup()" style="text-align: center;">اغلاق</button>
+
+    </td>
+    </tr>
+    </table>
+    </div>
+    
+
+      <script>
+        // فتح الشاشة المنبثقة
+        function openPopup() {
+          document.getElementById("myPopup").style.display = "block";
+        }
+    
+        // إغلاق الشاشة المنبثقة
+        function closePopup() {
+          document.getElementById("myPopup").style.display = "none";
+        }
+      </script>
+
+
+
+    <script>
+        
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchData(); // استرجاع البيانات عند تحميل الصفحة
+        });
+
+        async function fetchData(){
+            axios.get('http://localhost:3000/campaign/').then(function (response) 
+             {
+    
+        populateTable(response.data);
+            }
+            )}
+
+
+        function populateTable(data) {
+            var tableBody = document.querySelector('#data-table tbody');
+            tableBody.innerHTML = ''; // مسح الجدول الحالي
+
+            data.forEach(function (row) {
+                var newRow = tableBody.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                var cell4 = newRow.insertCell(3);
+                var cell5 = newRow.insertCell(4);
+                var cell6 = newRow.insertCell(5);
+                var cell7 = newRow.insertCell(6);
+                var cell8 = newRow.insertCell(7);
+                var cell9 = newRow.insertCell(8);
+                var cell10 = newRow.insertCell(9);
+                var cell11 = newRow.insertCell(10);
+                var cell12 = newRow.insertCell(11);
+                var cell13 = newRow.insertCell(12);
+                var cell14 = newRow.insertCell(13);
+
+               
+           
+
+                cell1.textContent = row.name;
+                cell2.textContent = row.title;
+                cell3.textContent = row.target+"$"; 
+                cell4.textContent = row.country;
+                cell5.textContent = row.address;
+                cell6.textContent = row.category;
+                cell7.textContent = row.endTime;
+                cell8.textContent = row.preority;
+                cell9.textContent = row.status;
+                cell10.textContent = row.licenseNumber;
+                cell11.textContent = row.note;
+                cell12.textContent = row.amount+"$";
+                cell13.textContent = row.rate;
+                cell14.innerHTML = '<button class="edit-btn" onclick="editRow(\'' + row.id + '\')">تعديل</button>' +
+                                  '<button class="delete-btn" onclick="deleteRow(\'' + row.id + '\')">حذف</button>';
+            });
+        }
+        
+
+
+
+
+
+
+
+
+
+         function  addRow () {
+            
+            var name = document.getElementById('newName').value;
+            var avatar =document.getElementById('avatar').value;
+            var target = parseInt(document.getElementById('target').value);
+            var title = document.getElementById('title').value;
+            var country = document.getElementById('country').value;
+            var note = document.getElementById('note').value;
+            var endTime = document.getElementById('endTime').value;
+            var preority = document.getElementById('preority').value;
+            
+            var status = document.getElementById('status').value;
+            var address = document.getElementById('address').value;
+            var category = document.getElementsByName('c');
+            var selectedValues = [];
+            for (var i = 0; i < category.length; i++) {
+            if (category[i].checked) {
+                selectedValues.push(category[i].value);
+            }
+            }
+                     
+            const datas ={
+
+                "name": name,
+                "target": target,
+                "title": title,
+                "country": country,
+                "note": note,
+                "endTime": endTime,
+                "preority": preority,
+                "status": status,
+                "category": selectedValues,
+                "address": address,
+                "image": "https://example.com/sports.jpg",
+                "amount": 0,  
+                "type": "Sports",
+                "startTime": "2023-02-01T12:00:00Z",
+                "feedback": "ok",
+                "rate": 0,
+                "licenseNumber": "123",
+                "id": "0eb24b40-9cba-4c97-8f7f-ec1e5f619bba",
+                "createdAt": "2023-11-30T19:32:23.820Z",
+                "updatedAt": "2023-11-30T19:32:23.820Z"
+                }
+
+            axios.post('http://localhost:3000/campaign',datas).then(function (response)
+             {
+                if (response.status === 201) {
+                    console.log(response)
+                    closePopup();
+                    fetchData();
+                    alert("تم الاضافة");
+
+                }
+        
+                })
+
+            
+         
+
+           
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        function editRow(id) {
+            // قم بتنفيذ الإجراءات الفعلية للتعديل هنا
+        }
+
+
+        function deleteRow(id) {
+            console.log(id);
+            axios.delete(`http://localhost:3000/campaign/${id}`)
+            .then(response => {
+               fetchData();
+               alert("تم الحذف");
+            })
+            .catch(error => {
+                console.error('حدث خطأ أثناء حذف المورد:', error);
+            });
+                    }
+
+    </script>
+
+</body>
+</html>
+</html>

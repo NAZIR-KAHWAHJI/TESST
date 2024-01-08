@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+        <!-- ======= Styles ====== -->
+  <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        #image-preview {
+           
+            width: 247px;
+            height: 221px;
+            object-fit: fill;
+            border: 0px solid #ccc;
+            float: right;
+            margin: 10px;
+            border-radius: 20px;
+        }
+
+        .bll {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2a2185; 
+            color: white; /* White text color */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 20px; /* Rounded corners */
+            margin: 139px -6px;
+        }
+    
+        #imgco {
+        width: 300px;
+        height: 261px;
+        object-fit: fill;
+        border-radius: 65px;
+        margin: 23px 26px;
+        float: right;
+        }
+        hr {
+            border: 1px solid #ccc;
+            margin: 0px 22px
+        }
+
+
+
+              
+      input[type=text],[type=number], select, textarea {
+        width: 100%;
+        padding: 12px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        direction: rtl;
+        margin: 0 -23%;
+      }
+      #endTime{
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        direction: rtl;
+        margin: 0 -23%;
+
+
+      }
+      label {
+        display: block;
+        padding: 15px 4px;
+        margin: 19px 2px;
+      }
+
+      input[type=submit] {
+        background-color: #2a2185;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+      }
+
+      input[type=submit]:hover {
+        background-color: #2a2185;
+      }
+
+      .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+      }
+
+      .col-25 {
+          float: unset;
+          width: 102px;
+          margin-top: 17px;
+        }
+
+      .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+      }
+
+      /* Clear floats after the columns */
+      .row::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+      @media screen and (max-width: 600px) {
+        .col-25, .col-75, input[type=submit] {
+          width: 100%;
+          margin-top: 0;
+        }
+      }
+        
+
+   
+        
+       </style>
+
+    
+</head>
+
+<body>
+    
+  
+    <div class="container_m" >
+
+          <!-- =============== Navigation ================ -->
+   
+        <div class="navigation1" >
+            <ul>
+                <li>
+                    <a href="home.html">
+                        <span class="icon">
+                            <ion-icon name="leaf"></ion-icon>
+                        </span>
+                        <span class="title" style="font-size:x-large;">Donate</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="home.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">الصفحة الرئيسية</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tabr3at.html">
+                        <span class="icon">
+                            <ion-icon name="stats-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">حملات التبرع</span>
+                    </a>
+                </li>
+
+
+                <li>
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="git-network-outline"></ion-icon>
+                    </span>
+                    <span class="title">حملات التطوع</span>
+                </a>
+            </li>
+
+            
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </span>
+                        <span class="title">المتبرعين</span>
+                    </a>
+                </li>
+
+                    <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">المتطوعين</span>
+                    </a>
+                </li>
+               
+
+            </ul>
+        </div>
+  
+          <!-- =============== /Navigation ================ -->
+
+
+        <!-- ========================= Main ==================== -->
+        <div class="main1">
+
+
+            <div class="topbar" style="background: #2a2185;">
+                
+                <div class="toggle1" style="color: white;">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="dropdown">
+                        <div class="user">
+                            <img src="assets/imgs/customer01.jpg" alt="">
+                        </div>
+                        
+                        <div class="dropdown-content" style="left: 30px;">
+                            <a class="dropdown-item" href="#"> <ion-icon name="cog-outline"></ion-icon>  إعدادات 
+
+                            </a>
+
+                            <a class="dropdown-item" href="#">
+                                <ion-icon name="log-out-outline"></ion-icon>  تسجيل خروج
+                            </a>
+                        </div>
+                        
+                </div>
+            </div>
+
+  <!-- ========================= /Main ==================== -->
+
+
+        <h2 style="padding-right:15px; padding-top: 10px;">تعديل حملة</h2>
+
+        <img id="imgco">   
+
+        
+       
+        <input type="file" id="image-upload" accept="image/*" style="display:none;">
+        <label for="image-upload" class="bll">اختر صورة الحملة</label>
+     
+        <hr>
+        <br>
+       
+         
+         
+            <div class="container">
+                
+              
+                  <div class="row">
+                  <div class="col-75">
+                    <input type="text" id="newName">
+                  </div>
+                  <div class="col-25">
+                      <label for="newName">اسم الحملة:</label>
+                    </div>    
+                </div>
+
+              
+                <div class="row">
+                  <div class="col-75">
+                    <input type="number"   id="target">
+                  </div>
+                  <div class="col-25">
+                      <label for="target">المبلغ المطلوب:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-75">
+                    <input type="text" id="country">
+                  </div>
+                  <div class="col-25">
+                      <label for="country">البلد:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-75">
+                    <input type="text" id="address">
+                  </div>
+                  <div class="col-25">
+                      <label for="address">العنوان:</label>
+                    </div>
+                </div>
+
+                
+                <div class="row">
+                  <div class="col-75">
+                    <input type="datetime-local" id="endTime">
+                  </div>
+                  <div class="col-25">
+                    <label for="endTime">وقت انتهاء الحملة:</label>
+                    </div>
+                </div>
+
+                
+                
+              
+                <div class="row">
+                  <div class="col-75">
+                    <select id="preority">
+                      <option value="">اختر قيمة</option>
+                      <option value="Low">ضعيف</option>
+                      <option value="Medium">متوسط</option>
+                      <option value="High">عالي</option>
+                  </select>
+                  </div>
+                  <div class="col-25">
+                      <label for="preority">اهمية الحملة:</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-75">
+                    <select id="status">
+                      <option value="">اختر قيمة</option>
+                      <option value="Active">نشط</option>
+                      <option value="approved">غير نشط</option>
+                  </select>
+                  </div>
+                  <div class="col-25">
+                    <label for="status">حالة الحملة:</label>
+                    </div>
+                </div>
+              
+
+                <div class="row">
+                  <div class="col-75" style="border: 1px solid #ccc;background: white;padding: 12px 12px;margin: 7px 2px 13px 17.3%;border-radius: 4px;width: 75%;">
+                    <input type="checkbox" id="category1" name="c" value="رياضة"> رياضة&nbsp;&nbsp;&nbsp;  
+                    
+                    <input type="checkbox" id="category2" name="c" value="اجتماعي"> اجتماعي&nbsp;&nbsp;&nbsp;
+                    
+                    <input type="checkbox" id="category3" name="c" value="ثقافي"> ثقافي&nbsp;&nbsp;&nbsp;
+                 
+                  </div>
+                  <div class="col-25">
+                    <label for="category">فئات الحملة:</label>
+                    </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-75">
+                    <textarea id="description" style="height:100px"></textarea>
+                  </div>
+                  <div class="col-25">
+                      <label for="description">وصف الحملة:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-75">
+                    <textarea id="note" style="height:100px"></textarea>
+                  </div>
+                  <div class="col-25">
+                      <label for="note">ملاحظات:</label>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                  <input type="submit" value="تعديل" onclick="update()">
+                </div>
+               
+              </div>
+
+
+
+
+          
+
+
+
+
+
+        </div>
+            
+      
+      
+
+
+    
+        
+    </div>
+
+
+       <!-- =========== Scripts =========  -->
+       <script>
+         //get id
+         const urlParams = new URLSearchParams(window.location.search);
+        const cardId = urlParams.get('id');
+
+        axios.get('http://localhost:3000/campaign/'+cardId).then(function (response) {
+
+        var preview = document.getElementById('imgco');
+        preview.src=response.data.image;
+        var fileInput = document.getElementById('image-upload');
+        
+        fileInput.addEventListener('change', function(event) {
+         var file = this.files[0];
+        
+         if (file.type.match('image.*')) {
+           var reader = new FileReader();
+        
+           reader.addEventListener('load', function(event) {
+             preview.src = event.target.result;
+           });
+        
+           reader.readAsDataURL(file);
+         } else {
+           alert('Invalid image file');
+         }
+        });
+        var name = document.getElementById('newName');
+        var target =document.getElementById('target');
+        var country = document.getElementById('country');
+        var address = document.getElementById('address');
+        var preority = document.getElementById('preority');
+        var status = document.getElementById('status');
+        var title = document.getElementById('description');
+        var note = document.getElementById('note');
+        note.value=response.data.note;
+        title.value=response.data.title;
+        status.value=response.data.status;
+        preority.value=response.data.preority;
+        country.value=response.data.country;
+        address.value=response.data.address;
+        target.value=response.data.target;
+        name.value=response.data.name;
+
+      });
+
+        function  update () {    
+          var name = document.getElementById('newName').value;
+          var target = parseInt(document.getElementById('target').value);
+          var title = document.getElementById('description').value;
+            const datas ={
+
+                "name": name,
+                "target":target,
+                "title":title,
+               
+                }
+
+            axios.patch('http://localhost:3000/campaign/'+cardId,datas).then(function (response)
+             {
+                if (response.status === 200) {
+                  
+                    alert("تم التعديل");
+                    window.location.href = "tabr3at.html";
+
+                }
+        
+                })
+
+            
+         
+
+           
+        }
+
+        
+        </script>
+       <script src="assets/js/navbar.js"></script>
+   
+
+       <!-- ====== ionicons ======= -->
+       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+       <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+   </body>
+   
+   </html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+        <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+  
+    <style>
+      .card {
+          direction: rtl;
+          position: relative;
+          width: 315px;
+          height: 420px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          padding: 16px;
+          margin: 16px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .card img {
+          max-width: 95%;
+          height: 178px;
+          border-radius: 4px;
+          margin-bottom: 12px;
+      }
+      .card:hover {
+         background-color: #2a2185;
+         color: white;
+         transform: rotate(5deg);
+      }
+      .dot {
+          height: 20px;
+          width: 20px;
+          background-color: #fd2929;
+          border-radius: 50%;
+          position: absolute;
+          top: 0px;
+          margin: 0% 89%;
+      }
+      .add_b {
+        position: absolute;
+        top: 65px;
+        right: 20px;
+        width:50px;
+        height:50px;
+        border-Radius: 50%;
+        background-color: #2a2185;
+      
+      }
+
+      .add_b :hover{
+       cursor: pointer;
+      }
+      .add_b :hover::after{
+        content: "ddd";
+      }
+
+    </style>
+    
+</head>
+
+<body>
+    
+  
+    <div class="container_m" >
+
+          <!-- =============== Navigation ================ -->
+   
+        <div class="navigation1" >
+            <ul>
+                <li>
+                    <a href="home.html">
+                        <span class="icon">
+                            <ion-icon name="leaf"></ion-icon>
+                        </span>
+                        <span class="title" style="font-size:x-large;">Donate</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="home.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">الصفحة الرئيسية</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tabr3at.html">
+                        <span class="icon">
+                            <ion-icon name="stats-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">حملات التبرع</span>
+                    </a>
+                </li>
+
+
+                <li>
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="git-network-outline"></ion-icon>
+                    </span>
+                    <span class="title">حملات التطوع</span>
+                </a>
+            </li>
+
+            
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </span>
+                        <span class="title">المتبرعين</span>
+                    </a>
+                </li>
+
+                    <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">المتطوعين</span>
+                    </a>
+                </li>
+               
+
+            </ul>
+        </div>
+  
+          <!-- =============== /Navigation ================ -->
+
+
+        <!-- ========================= Main ==================== -->
+        <div class="main1">
+
+
+            <div class="topbar" style="background: #2a2185;">
+                
+                <div class="toggle1" style="color: rgb(255, 0, 0);">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="dropdown">
+                        <div class="user">
+                            <img src="assets/imgs/customer01.jpg" alt="">
+                        </div>
+                        
+                        <div class="dropdown-content" style="left: 30px;">
+                            <a class="dropdown-item" href="#"> <ion-icon name="cog-outline"></ion-icon>  إعدادات 
+
+                            </a>
+
+                            <a class="dropdown-item" href="#" onclick="logout()">
+                                <ion-icon name="log-out-outline"></ion-icon>  تسجيل خروج
+                            </a>
+                        </div>
+                        
+                </div>
+            </div>
+
+            <div>
+                <div class="card_body" onclick="test(event)" style="display: flex; justify-content: flex-start; flex-wrap: wrap;padding: 52px 0px; "></div>
+
+            </div>
+
+            <a class="add_b" href="addcom.html"> <ion-icon name="add-outline" style="height: 48px; width: 48px;color: white"></ion-icon> </a>
+
+
+
+         
+            
+        <!-- ========================= /Main ==================== -->
+       
+        
+
+
+    
+        
+    </div>
+
+
+
+       <!-- =========== Scripts =========  -->
+    
+      <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+          fetchData();
+        });
+      
+        async function fetchData() {
+         
+          axios.get('http://localhost:3000/campaign/').then(function (response) {
+            populateCards(response.data);
+          });
+        }
+
+         
+
+      
+        function populateCards(data) {
+          data.forEach(function (row) {
+            // إنشاء بطاقة
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            // إضافة صورة
+            const image = document.createElement("img");
+            image.src = row.image;
+            card.appendChild(image);
+
+            // إضافة اسم
+            const name = document.createElement("h2");
+            name.textContent = row.name;
+            card.appendChild(name);
+
+            // إضافة وصف
+            const description = document.createElement("p");
+            description.textContent = row.title;
+            card.appendChild(description);
+
+            // إضافة شريط النسبة
+            const progressBar = document.createElement("progress");
+            progressBar.value = (row.amount/row.target)*100;
+            progressBar.max = 100;
+            progressBar.style.height="30px"
+            progressBar.style.margin="3% 0px"
+            card.appendChild(progressBar);
+
+         
+            // إضافة  النسبة المئوية
+            const sideLabel = document.createElement("span");
+            sideLabel.textContent = (row.amount/row.target)*100+"%";
+            sideLabel.style.position = "relative";
+            sideLabel.style.bottom = "3.5%";
+            sideLabel.style.left = "35%";
+            sideLabel.style.fontSize="16px"
+            sideLabel.style.transform = "translate(-50%, -50%)";
+            card.appendChild(sideLabel);
+
+            // إضافة المبلغ المدفوع
+            const amountLabel = document.createElement("span");
+            amountLabel.textContent = row.amount.toLocaleString()+" ليرة";
+            amountLabel.style.position = "relative";
+            amountLabel.style.display="flex";
+            amountLabel.style.top = "-9%";
+            amountLabel.style.right = "57%";
+            card.appendChild(amountLabel);
+
+             // إضافة المبلغ الكلي 
+            const goalLabel = document.createElement("span");
+            goalLabel.textContent = "الهدف: "+row.target.toLocaleString()+" ليرة ";
+            goalLabel.style.display="flex";
+            goalLabel.style.position = "relative";
+            goalLabel.style.bottom = "8%";
+            goalLabel.style.right = "0%";
+            card.appendChild(goalLabel);
+
+
+            // إضافة عنصر دائرة
+            const statusCircle = document.createElement("div");
+            statusCircle.classList.add("dot");
+
+            // تعيين اللون بناءً على قيمة completed
+            if (row.status === "Active") {
+              statusCircle.style.backgroundColor = "green";
+            } else {
+              statusCircle.style.backgroundColor = "red";
+            }
+
+            card.appendChild(statusCircle);
+
+
+             // إضافة المبلغ الكلي 
+            const num_d = document.createElement("span");
+            num_d.textContent = "عدد المتبرعين:2";
+            num_d.style.position = "absolute";
+            num_d.style.bottom = "0px";
+            num_d.style.right = "1%";
+            card.appendChild(num_d);
+
+            // قم بإنشاء معرف فريد لكل بطاقة (بناءً على افتراض وجود 'id' في بياناتك)
+            const cardId =row.id;
+            card.setAttribute('data-card-id', cardId);
+
+            // أضف مستمع حدث النقر إلى البطاقة الذي يستدعي وظيفة الاختبار باستخدام معرف البطاقة
+            card.addEventListener('click', function () {
+                test(cardId);
+            });
+
+
+
+
+
+
+       
+
+           
+
+
+            // إضافة البطاقة إلى الصفحة
+            const container = document.querySelector(".card_body");
+            
+            container.appendChild(card);
+            
+          });
+
+
+         
+        }
+   
+   
+        function test(event) {
+    // احذف التصريف الافتراضي للحدث
+    event.preventDefault();
+
+    // احصل على العنصر المستهدف الذي تم النقر عليه
+    const clickedElement = event.target;
+
+    // التحقق مما إذا كان النقر تم على البطاقة أو أحد أبنائها
+    const cardElement = clickedElement.closest('.card');
+    if (cardElement) {
+        // إذا تم النقر على البطاقة، قم بالحصول على معرف البطاقة
+        const cardId = cardElement.getAttribute('data-card-id');
+
+        // استخدم معرف البطاقة حسب الحاجة
+        
+        window.location.href = 'informationtabr3at.html?id=' + cardId;
+
+        // يمكنك القيام بإجراءات أخرى باستخدام معرف البطاقة هنا
+    }
+}
+
+  </script>
+
+       <script src="assets/js/navbar.js"></script>
+
+       <!-- ====== ionicons ======= -->
+       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+       <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+   </body>
+   
+   </html>
